@@ -4,42 +4,91 @@ import { doc, setDoc } from 'firebase/firestore'
 import { auth, db } from '../firebase/config'
 import { useNavigate, Link } from 'react-router-dom'
 
+const ROLES = [
+  { key: 'student', label: '학생', icon: '🎓', color: '#34C759', shadow: 'rgba(52,199,89,0.3)' },
+  { key: 'teacher', label: '교사', icon: '📚', color: '#007AFF', shadow: 'rgba(0,122,255,0.3)' },
+]
+
+function getErrorMessage(code) {
+  switch (code) {
+    case 'auth/email-already-in-use':
+      return '이미 사용 중인 이메일입니다.'
+    case 'auth/weak-password':
+      return '비밀번호는 6자 이상이어야 합니다.'
+    case 'auth/invalid-email':
+      return '올바른 이메일 형식이 아닙니다.'
+    case 'auth/operation-not-allowed':
+      return 'Firebase 콘솔에서 이메일/비밀번호 로그인을 활성화해 주세요.'
+    case 'auth/network-request-failed':
+      return '네트워크 연결을 확인해 주세요.'
+    default:
+      return `회원가입에 실패했습니다. (${code})`
+  }
+}
+
 export default function SignupPage() {
+  const [role, setRole] = useState('student')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
+
+  const current = ROLES.find((r) => r.key === role)
 
   async function handleSignup(e) {
     e.preventDefault()
     setError('')
+    setLoading(true)
     try {
       const { user } = await createUserWithEmailAndPassword(auth, email, password)
       await setDoc(doc(db, 'users', user.uid), {
         email: user.email,
-        role: 'student',
+        role,
       })
       navigate('/todos')
     } catch (err) {
-      if (err.code === 'auth/email-already-in-use') {
-        setError('이미 사용 중인 이메일입니다.')
-      } else if (err.code === 'auth/weak-password') {
-        setError('비밀번호는 6자 이상이어야 합니다.')
-      } else {
-        setError('회원가입에 실패했습니다.')
-      }
+      console.error(err)
+      setError(getErrorMessage(err.code))
+    } finally {
+      setLoading(false)
     }
   }
 
   return (
     <div className="auth-page">
-      <div className="auth-logo" style={{ background: '#34C759', boxShadow: '0 4px 20px rgba(52,199,89,0.35)' }}>
-        🎓
+      <div
+        className="auth-logo"
+        style={{
+          background: current.color,
+          boxShadow: `0 4px 20px ${current.shadow}`,
+          transition: 'background 0.3s, box-shadow 0.3s',
+        }}
+      >
+        {current.icon}
       </div>
-      <h1 className="auth-title">학생 회원가입</h1>
+      <h1 className="auth-title">{current.label} 회원가입</h1>
       <p className="auth-subtitle">새 계정을 만드세요</p>
 
-      <form onSubmit={handleSignup} style={{ width: '100%', maxWidth: 360, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      {/* Role segmented control */}
+      <div className="segment-control" style={{ marginBottom: 24 }}>
+        {ROLES.map((r) => (
+          <button
+            key={r.key}
+            type="button"
+            className={`segment-btn${role === r.key ? ' active' : ''}`}
+            style={role === r.key ? { background: current.color, color: '#fff' } : {}}
+            onClick={() => { setRole(r.key); setError('') }}
+          >
+            {r.label}
+          </button>
+        ))}
+      </div>
+
+      <form
+        onSubmit={handleSignup}
+        style={{ width: '100%', maxWidth: 360, display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+      >
         <div className="auth-card">
           <div className="auth-field">
             <span className="auth-field-icon">✉</span>
@@ -70,9 +119,15 @@ export default function SignupPage() {
         <button
           type="submit"
           className="btn-primary"
-          style={{ background: '#34C759', boxShadow: '0 4px 16px rgba(52,199,89,0.3)' }}
+          disabled={loading}
+          style={{
+            background: current.color,
+            boxShadow: `0 4px 16px ${current.shadow}`,
+            opacity: loading ? 0.7 : 1,
+            transition: 'background 0.3s',
+          }}
         >
-          회원가입
+          {loading ? '처리 중...' : `${current.label} 회원가입`}
         </button>
       </form>
 

@@ -151,6 +151,34 @@ body {
   font-weight: 500;
 }
 
+/* ── Segmented Control ── */
+.segment-control {
+  display: flex;
+  background: rgba(118, 118, 128, 0.12);
+  border-radius: 9px;
+  padding: 2px;
+  width: 100%;
+  max-width: 360px;
+}
+
+.segment-btn {
+  flex: 1;
+  height: 36px;
+  border: none;
+  border-radius: 7px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text-primary);
+  transition: background 0.25s, color 0.25s, box-shadow 0.25s;
+}
+
+.segment-btn.active {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
 /* ── Todo Page ── */
 .todo-page {
   min-height: 100vh;
