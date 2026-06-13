@@ -32,27 +32,51 @@ export default function SignupPage() {
   }
 
   return (
-    <div>
-      <h2>학생 회원가입</h2>
-      <form onSubmit={handleSignup}>
-        <input
-          type="email"
-          placeholder="이메일"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="비밀번호 (6자 이상)"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">회원가입</button>
+    <div className="auth-page">
+      <div className="auth-logo" style={{ background: '#34C759', boxShadow: '0 4px 20px rgba(52,199,89,0.35)' }}>
+        🎓
+      </div>
+      <h1 className="auth-title">학생 회원가입</h1>
+      <p className="auth-subtitle">새 계정을 만드세요</p>
+
+      <form onSubmit={handleSignup} style={{ width: '100%', maxWidth: 360, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div className="auth-card">
+          <div className="auth-field">
+            <span className="auth-field-icon">✉</span>
+            <input
+              type="email"
+              placeholder="이메일"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              autoComplete="email"
+            />
+          </div>
+          <div className="auth-field">
+            <span className="auth-field-icon">🔒</span>
+            <input
+              type="password"
+              placeholder="비밀번호 (6자 이상)"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              autoComplete="new-password"
+            />
+          </div>
+        </div>
+
+        {error && <p className="auth-error">{error}</p>}
+
+        <button
+          type="submit"
+          className="btn-primary"
+          style={{ background: '#34C759', boxShadow: '0 4px 16px rgba(52,199,89,0.3)' }}
+        >
+          회원가입
+        </button>
       </form>
-      <p>
+
+      <p className="auth-footer">
         이미 계정이 있으신가요? <Link to="/login">로그인</Link>
       </p>
     </div>

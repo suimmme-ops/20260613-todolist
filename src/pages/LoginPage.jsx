@@ -21,27 +21,43 @@ export default function LoginPage() {
   }
 
   return (
-    <div>
-      <h2>로그인</h2>
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="이메일"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="비밀번호"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">로그인</button>
+    <div className="auth-page">
+      <div className="auth-logo">✓</div>
+      <h1 className="auth-title">할 일 관리</h1>
+      <p className="auth-subtitle">계정에 로그인하세요</p>
+
+      <form onSubmit={handleLogin} style={{ width: '100%', maxWidth: 360, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div className="auth-card">
+          <div className="auth-field">
+            <span className="auth-field-icon">✉</span>
+            <input
+              type="email"
+              placeholder="이메일"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              autoComplete="email"
+            />
+          </div>
+          <div className="auth-field">
+            <span className="auth-field-icon">🔒</span>
+            <input
+              type="password"
+              placeholder="비밀번호"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              autoComplete="current-password"
+            />
+          </div>
+        </div>
+
+        {error && <p className="auth-error">{error}</p>}
+
+        <button type="submit" className="btn-primary">로그인</button>
       </form>
-      <p>
+
+      <p className="auth-footer">
         학생이신가요? <Link to="/signup">회원가입</Link>
       </p>
     </div>

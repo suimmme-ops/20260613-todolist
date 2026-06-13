@@ -11,13 +11,15 @@ export default function TodoForm({ onAdd }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="todo-form" onSubmit={handleSubmit}>
       <input
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="할 일을 입력하세요"
+        placeholder="새로운 할 일 추가..."
       />
-      <button type="submit">추가</button>
+      <button type="submit" className="btn-add" aria-label="추가">
+        +
+      </button>
     </form>
   )
 }
