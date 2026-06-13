@@ -7,7 +7,7 @@ import TodoItem from '../components/TodoItem'
 
 export default function TodoPage() {
   const { currentUser, userRole } = useAuth()
-  const { todos, loading, addTodo, updateTodo, deleteTodo } = useTodos()
+  const { todos, loading, error, addTodo, updateTodo, deleteTodo } = useTodos()
 
   const pending = todos.filter((t) => !t.done)
   const done = todos.filter((t) => t.done)
@@ -24,7 +24,7 @@ export default function TodoPage() {
         <div className="user-badge">
           <span>{currentUser.email}</span>
           <span className="role-chip">
-            {userRole === 'teacher' ? '교사' : '학생'}
+            {userRole === 'teacher' ? '📚 교사' : '🎓 학생'}
           </span>
         </div>
       </header>
@@ -32,15 +32,35 @@ export default function TodoPage() {
       <div className="todo-body">
         <TodoForm onAdd={addTodo} />
 
+        {error && <p className="error-banner">⚠️ {error}</p>}
+
         {loading ? (
           <div className="loading">
             <div className="spinner" />
           </div>
         ) : (
           <>
+            {/* Stats */}
+            {todos.length > 0 && (
+              <div className="stats-row">
+                <div className="stat-chip">
+                  <div className="stat-chip-num">{todos.length}</div>
+                  <div className="stat-chip-label">전체</div>
+                </div>
+                <div className="stat-chip">
+                  <div className="stat-chip-num">{pending.length}</div>
+                  <div className="stat-chip-label">진행 중</div>
+                </div>
+                <div className="stat-chip">
+                  <div className="stat-chip-num">{done.length}</div>
+                  <div className="stat-chip-label">완료</div>
+                </div>
+              </div>
+            )}
+
             {pending.length > 0 && (
               <section style={{ marginBottom: 24 }}>
-                <p className="section-label">진행 중 · {pending.length}</p>
+                <p className="section-label">진행 중</p>
                 <ul className="todo-list">
                   {pending.map((todo) => (
                     <TodoItem
@@ -56,7 +76,7 @@ export default function TodoPage() {
 
             {done.length > 0 && (
               <section style={{ marginBottom: 24 }}>
-                <p className="section-label">완료 · {done.length}</p>
+                <p className="section-label">완료</p>
                 <ul className="todo-list">
                   {done.map((todo) => (
                     <TodoItem
@@ -70,10 +90,11 @@ export default function TodoPage() {
               </section>
             )}
 
-            {todos.length === 0 && (
+            {todos.length === 0 && !error && (
               <div className="empty-state">
-                <div className="empty-state-icon">📋</div>
-                <p>할 일을 추가해보세요</p>
+                <div className="empty-state-icon">✨</div>
+                <p>오늘의 할 일을 추가해보세요</p>
+                <small>위 입력창에 할 일을 입력하고 + 버튼을 누르세요</small>
               </div>
             )}
           </>
