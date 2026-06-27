@@ -530,6 +530,247 @@ body::after {
   display: block;
 }
 
+/* ── Ethics Gate ── */
+.ethics-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0 60px;
+}
+
+.ethics-header {
+  width: 100%;
+  text-align: center;
+  padding: 40px 24px 28px;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.ethics-header-icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.ethics-title {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  background: linear-gradient(135deg, #7c3aed, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 6px;
+}
+
+.ethics-subtitle {
+  font-size: 14px;
+  color: var(--text-sub);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+.ethics-body {
+  width: 100%;
+  max-width: 720px;
+  padding: 28px 16px 0;
+}
+
+.ethics-table-header {
+  display: flex;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f97316, #fb923c);
+  margin-bottom: 0;
+}
+
+.ethics-th-value,
+.ethics-th-guide {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  padding: 11px 16px;
+  letter-spacing: 0.3px;
+}
+
+.ethics-th-value {
+  width: 130px;
+  flex-shrink: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+  text-align: center;
+}
+
+.ethics-th-guide {
+  flex: 1;
+}
+
+.ethics-list {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-top: none;
+  box-shadow: 0 6px 24px rgba(120, 80, 200, 0.1);
+}
+
+.ethics-card {
+  display: flex;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+  transition: background 0.15s;
+}
+
+.ethics-card:last-child {
+  border-bottom: none;
+}
+
+.ethics-card:hover {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.ethics-card-values {
+  width: 130px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px 12px;
+  border-right: 1px solid rgba(200, 180, 255, 0.2);
+}
+
+.ethics-value-badge {
+  display: inline-block;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.ethics-card-content {
+  flex: 1;
+  padding: 16px 18px;
+}
+
+.ethics-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.ethics-guide-num {
+  font-size: 12px;
+  font-weight: 700;
+  color: #ea580c;
+  background: rgba(249, 115, 22, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.25);
+  padding: 2px 9px;
+  border-radius: 20px;
+}
+
+.ethics-guide-category {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-sub);
+}
+
+.ethics-card-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+  line-height: 1.45;
+}
+
+.ethics-card-body {
+  font-size: 13px;
+  color: var(--text-sub);
+  line-height: 1.6;
+}
+
+.ethics-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 0 0;
+  gap: 12px;
+}
+
+.ethics-scroll-hint {
+  font-size: 13px;
+  color: var(--text-light);
+  text-align: center;
+  animation: bounce 1.6s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+.ethics-accept-btn {
+  width: 100%;
+  max-width: 520px;
+  padding: 16px 24px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 15px;
+  font-weight: 700;
+  font-family: inherit;
+  line-height: 1.45;
+  text-align: center;
+  cursor: not-allowed;
+  background: rgba(200, 180, 255, 0.25);
+  color: rgba(100, 80, 160, 0.45);
+  border: 1px solid rgba(200, 180, 255, 0.3);
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s, transform 0.15s;
+}
+
+.ethics-accept-btn.active {
+  background: linear-gradient(135deg, #a78bfa, #818cf8);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 8px 28px rgba(139, 92, 246, 0.4);
+  cursor: pointer;
+}
+
+.ethics-accept-btn.active:active {
+  transform: scale(0.98);
+  opacity: 0.88;
+}
+
+@media (max-width: 520px) {
+  .ethics-card {
+    flex-direction: column;
+  }
+
+  .ethics-card-values {
+    width: 100%;
+    flex-direction: row;
+    justify-content: flex-start;
+    border-right: none;
+    border-bottom: 1px solid rgba(200, 180, 255, 0.2);
+    padding: 10px 14px;
+  }
+
+  .ethics-th-value {
+    width: 100px;
+  }
+}
+
 /* ── Loading ── */
 .loading {
   display: flex;
@@ -585,4 +826,241 @@ body::after {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-top: 2px;
+}
+
+/* ── Footer ── */
+body {
+  padding-bottom: 60px;
+}
+
+.app-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  height: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 -4px 20px rgba(120, 80, 200, 0.07);
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-link {
+  background: none;
+  border: none;
+  font-size: 12px;
+  font-family: inherit;
+  color: var(--text-sub);
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: color 0.15s;
+}
+
+.footer-link:hover {
+  color: #7c3aed;
+}
+
+.footer-link--bold {
+  font-weight: 600;
+  color: #7c3aed;
+}
+
+.footer-link--bold:hover {
+  color: #5b21b6;
+}
+
+.footer-sep {
+  font-size: 11px;
+  color: var(--text-light);
+}
+
+.footer-copy {
+  font-size: 11px;
+  color: var(--text-light);
+  letter-spacing: 0.1px;
+}
+
+/* ── Policy Modal ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(30, 27, 75, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 16px;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 560px;
+  max-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 60px rgba(80, 40, 160, 0.2);
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid rgba(200, 180, 255, 0.25);
+  flex-shrink: 0;
+}
+
+.modal-title {
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  background: linear-gradient(135deg, #7c3aed, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.modal-close-btn {
+  background: rgba(200, 180, 255, 0.2);
+  border: 1px solid rgba(200, 180, 255, 0.35);
+  color: var(--text-sub);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+
+.modal-close-btn:hover {
+  background: rgba(200, 180, 255, 0.4);
+}
+
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background: rgba(167, 139, 250, 0.35);
+  border-radius: 4px;
+}
+
+.modal-section {
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(200, 180, 255, 0.18);
+}
+
+.modal-section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.modal-section-heading {
+  font-size: 13px;
+  font-weight: 700;
+  color: #7c3aed;
+  margin-bottom: 6px;
+  letter-spacing: -0.2px;
+}
+
+.modal-section-text {
+  font-size: 13px;
+  color: var(--text-sub);
+  line-height: 1.65;
+}
+
+.modal-section-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.modal-section-list li {
+  font-size: 13px;
+  color: var(--text-sub);
+  line-height: 1.55;
+  padding-left: 14px;
+  position: relative;
+}
+
+.modal-section-list li::before {
+  content: '·';
+  position: absolute;
+  left: 3px;
+  color: #a78bfa;
+  font-weight: 700;
+}
+
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px 14px;
+  border-top: 1px solid rgba(200, 180, 255, 0.25);
+  flex-shrink: 0;
+}
+
+.modal-effective {
+  font-size: 11.5px;
+  color: var(--text-light);
+}
+
+.modal-confirm-btn {
+  height: 34px;
+  padding: 0 20px;
+  background: linear-gradient(135deg, #a78bfa, #818cf8);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.3);
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.modal-confirm-btn:active {
+  opacity: 0.85;
+  transform: scale(0.97);
 }

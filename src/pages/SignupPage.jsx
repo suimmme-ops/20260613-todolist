@@ -51,7 +51,7 @@ export default function SignupPage() {
     try {
       const { user } = await createUserWithEmailAndPassword(auth, email, password)
       await setDoc(doc(db, 'users', user.uid), { email: user.email, role })
-      navigate('/todos')
+      navigate('/ethics')
     } catch (err) {
       console.error(err)
       setError(getErrorMessage(err.code))
